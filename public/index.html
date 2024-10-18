@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vehicle Service Reservation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+  <script defer src="/js/app.js"></script> <!-- Frontend JavaScript -->
+</head>
+<body>
+  <div class="container">
+    <h1>Vehicle Service Reservation</h1>
+
+    <!-- Reservation Form -->
+    <form id="reservation-form" action="/reservations" method="POST">
+      <input type="hidden" name="_csrf" id="csrf-token" value="">
+
+      <!-- Date -->
+      <label for="date">Service Date (cannot be on Sundays):</label>
+      <input type="date" id="date" name="date" required>
+
+      <!-- Time -->
+      <label for="time">Preferred Time:</label>
+      <select id="time" name="time" required>
+        <option value="10 AM">10 AM</option>
+        <option value="11 AM">11 AM</option>
+        <option value="12 PM">12 PM</option>
+      </select>
+
+      <!-- Location -->
+      <label for="location">Preferred Location:</label>
+      <select id="location" name="location" required>
+        <option value="District 1">District 1</option>
+        <option value="District 2">District 2</option>
+        <option value="District 3">District 3</option>
+      </select>
+
+      <!-- Vehicle Registration Number -->
+      <label for="vehicle_no">Vehicle Registration Number:</label>
+      <input type="text" id="vehicle_no" name="vehicle_no" required>
+
+      <!-- Current Mileage -->
+      <label for="mileage">Current Mileage:</label>
+      <input type="number" id="mileage" name="mileage" required>
+
+      <!-- Message -->
+      <label for="message">Additional Message (optional):</label>
+      <textarea id="message" name="message"></textarea>
+
+      <button type="submit">Submit Reservation</button>
+    </form>
+
+    <!-- Display All Reservations -->
+    <h2>Your Reservations</h2>
+    <table id="reservations-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Location</th>
+          <th>Vehicle Number</th>
+          <th>Mileage</th>
+          <th>Message</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <form action="/reservations" method="POST">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <!-- Other form inputs go here -->
+          </form>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
